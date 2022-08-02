@@ -19,20 +19,22 @@ const ArticlesPage = () => (
           <AuthorCard
             name={AuthorCardData.name}
             description={AuthorCardData.description}
-            url={AuthorCardData.url}
+            img={AuthorCardData.url}
           />
         </section>
         <section className="articles-page__list">
           <div>
             {articles.map(({
-              previewUrl, tags, title, description, author,
-            }, index) => (
+              id, previewUrl, tags, title, description, viewsCount, date, author,
+            }) => (
               <Article
-                key={index}
-                img={previewUrl}
+                key={id}
+                previewUrl={previewUrl}
                 tags={tags}
                 title={title}
                 description={description}
+                viewsCount={viewsCount}
+                date={date}
                 author={author}
                 type="column"
               />
