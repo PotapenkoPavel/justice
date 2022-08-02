@@ -3,20 +3,22 @@ import ArticleInfo from './ArticleInfo/ArticleInfo';
 import Tag from '../Tag/Tag';
 import './Article.sass';
 
-const Article = ({ data, type = 'default' }) => (
+const Article = ({
+  previewUrl, tags, title, description, viewsCount, date, author, type = 'default',
+}) => (
   <div className={cx('article', `article_${type}`)}>
     <div className="article__preview-container">
-      <img src={data.preview_url} alt="preview" />
+      <img src={previewUrl} alt="preview" />
     </div>
     <div className="article__content">
       <div className="article__tags">
-        {data.tags.map((el, index) => <Tag key={index}>{el}</Tag>)}
+        {tags?.map((tag) => <Tag key={tag}>{tag}</Tag>)}
       </div>
-      <div className="article__title">{data.title}</div>
+      <div className="article__title">{title}</div>
       <div className="article__description">
-        {data.description}
+        {description}
       </div>
-      <ArticleInfo data={data.author} />
+      <ArticleInfo viewsCount={viewsCount} date={date} author={author} />
     </div>
   </div>
 );
