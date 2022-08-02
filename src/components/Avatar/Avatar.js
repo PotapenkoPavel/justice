@@ -1,7 +1,7 @@
-import cx from 'classnames'
+import cx from 'classnames';
 
-import './Avatar.sass'
+import './Avatar.sass';
 
-export default function Avatar({url, size}) {
-    return <img className={cx('avatar', size)} src={url} alt="avatar"/>
-}
+const Avatar = ({ url, size }) => <img className={cx('avatar', size)} src={url} alt="avatar" />;
+
+export default Avatar;

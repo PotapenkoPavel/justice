@@ -1,3 +1,3 @@
-import MainPage from "./pages/Main/MainPage";
+import MainPage from './pages/Main/MainPage';
 
-export const App = () => <MainPage />
+export const App = () => <MainPage />;

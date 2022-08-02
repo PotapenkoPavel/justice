@@ -1,10 +1,11 @@
-import Avatar from "../../Avatar/Avatar";
-import './Author.sass'
+import Avatar from '../../Avatar/Avatar';
+import './Author.sass';
 
-export default function Author({ author }) {
-    return <div className="author">
-        <Avatar name={author.name} url={author.avatar_url} size="small"/>
-        <div className="author__name">{author.name}</div>
-    </div>;
+const Author = ({ author }) => (
+  <div className="author">
+    <Avatar name={author.name} url={author.avatar_url} size="small" />
+    <div className="author__name">{author.name}</div>
+  </div>
+);
 
-}
+export default Author;

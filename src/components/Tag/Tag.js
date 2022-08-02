@@ -1,5 +1,5 @@
-import './Tag.sass'
+import './Tag.sass';
 
-export default function Tag({children}) {
-    return <div className="tag">{children}</div>
-}
+const Tag = ({ children }) => <div className="tag">{children}</div>;
+
+export default Tag;
