@@ -1,7 +1,5 @@
 import { Button } from '../../components/Button/Button';
 import Article from '../../components/Atricle/Article';
-import { Footer } from '../../components/Footer/Footer';
-import { Header } from '../../components/Header/Header';
 
 import { articles, reccomendArticle } from '../../moc';
 
@@ -9,8 +7,6 @@ import './MainPage.sass';
 
 const MainPage = () => (
   <>
-    <Header />
-
     <section className="recommended-block">
       <div className="container">
         <Article data={reccomendArticle} />
@@ -30,8 +26,6 @@ const MainPage = () => (
         </div>
       </div>
     </section>
-
-    <Footer />
   </>
 );
 
