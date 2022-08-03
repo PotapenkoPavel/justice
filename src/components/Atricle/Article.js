@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import ArticleInfo from './ArticleInfo/ArticleInfo';
+import ArticleInfo from '../ArticleInfo/ArticleInfo';
 import Tag from '../Tag/Tag';
 import './Article.sass';
 
