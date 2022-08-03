@@ -10,7 +10,7 @@ import 'draft-js/dist/Draft.css';
 import './AddArticlePage.sass';
 
 const toolbarOptions = {
-  options: ['inline', 'list', 'textAlign'],
+  options: ['inline', 'list', 'image', 'textAlign'],
   inline: {
     inDropdown: false,
     bold: { icon: '/images/editor/B.svg' },
@@ -18,8 +18,13 @@ const toolbarOptions = {
   list: {
     inDropdown: false,
   },
+  image: {
+    defaultSize: {
+      width: '640px',
+      height: '400px',
+    },
+  },
   textAlign: { inDropdown: false, className: 'editor-text-align-area' },
-
 };
 
 const AddArticlePage = () => {
@@ -55,7 +60,6 @@ const AddArticlePage = () => {
               value={tag}
               onChange={(e) => setTag(e.target.value)}
             />
-
             <Editor
               editorState={editorState}
               onEditorStateChange={setEditorState}
