@@ -3,11 +3,11 @@ import Views from '../Views/Views';
 
 import './ArticleInfo.sass';
 
-const ArticleInfo = ({ data }) => (
+const ArticleInfo = ({ date, viewsCount, author }) => (
   <div className="article-info">
-    <Author author={data} />
-    <div className="article-info__time">{data.date}</div>
-    <Views count={data.views_count} />
+    <Author name={author.name} img={author.avatarUrl} />
+    <div className="article-info__time">{date}</div>
+    <Views count={viewsCount} />
   </div>
 );
 
