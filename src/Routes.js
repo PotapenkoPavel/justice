@@ -5,30 +5,31 @@ import AddArticlePage from './pages/AddArticle/AddArticlePage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
 import SignInPage from './pages/SignInPage/SignInPage';
 
+const ProtectedRoute = ({ isAuth, children }) => {
+  if (!isAuth) return <Navigate to="/sign-in" replace />;
+
+  return children;
+};
+
 const AppRoutes = () => {
   const isAuth = Boolean(JSON.parse(localStorage.getItem('user')));
 
   return (
     <Routes>
-      {isAuth ? (
-        <>
-          <Route path="/" element={<MainPage />} />
-          <Route path="articles" element={<ArticlesPage />} />
-          <Route path="add-article" element={<AddArticlePage />} />
-          <Route path="/article/:id" element={<ArticlePage />} />
-        </>
-      )
-        : (
-          <>
-            <Route path="/" element={<MainPage />} />
-            <Route path="articles" element={<ArticlesPage />} />
-            <Route path="add-article" element={<Navigate to="/sign-in" replace />} />
-            <Route path="/article/:id" element={<ArticlePage />} />
-            <Route path="/sign-in" element={<SignInPage />} />
-          </>
+      <Route path="/" element={<MainPage />} />
+      <Route path="articles" element={<ArticlesPage />} />
+      <Route path="/article/:id" element={<ArticlePage />} />
+      <Route path="/sign-in" element={<SignInPage />} />
+      <Route
+        isAuth={isAuth}
+        path="/add-article"
+        element={(
+          <ProtectedRoute>
+            <AddArticlePage />
+          </ProtectedRoute>
         )}
+      />
     </Routes>
-
   );
 };
 
