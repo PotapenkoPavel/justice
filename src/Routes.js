@@ -17,9 +17,17 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<MainPage />} />
-      <Route path="articles" element={<ArticlesPage />} />
       <Route path="/article/:id" element={<ArticlePage />} />
       <Route path="/sign-in" element={<SignInPage />} />
+      <Route
+        isAuth={isAuth}
+        path="articles"
+        element={(
+          <ProtectedRoute>
+            <ArticlesPage />
+          </ProtectedRoute>
+        )}
+      />
       <Route
         isAuth={isAuth}
         path="/add-article"
