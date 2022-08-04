@@ -5,13 +5,14 @@ import MainPage from './pages/Main/MainPage';
 import ArticlesPage from './pages/Articles/ArticlesPage';
 import AddArticlePage from './pages/AddArticle/AddArticlePage';
 
+
 export const App = () => (
   <>
     <Header />
     <Routes>
       <Route path="/" element={<MainPage />} />
       <Route path="articles" element={<ArticlesPage />} />
-      <Route path="add-article" element={<AddArticlePage />} />
+      <Route path="/article/:id" element={<ArticlePage />} />
     </Routes>
     <Footer />
   </>
