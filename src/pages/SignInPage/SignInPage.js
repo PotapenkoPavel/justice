@@ -18,7 +18,7 @@ const SignInPage = () => (
           email: '',
           password: '',
         }}
-        onSubmit={() => true}
+        onSubmit={(values) => localStorage.setItem('isAuth', JSON.stringify(values))}
         validationSchema={schema}
       >
         <Form className="sign-in__form">
