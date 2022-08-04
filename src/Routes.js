@@ -6,11 +6,7 @@ import ArticlePage from './pages/ArticlePage/ArticlePage';
 import SignInPage from './pages/SignInPage/SignInPage';
 import LogInPage from './pages/LogInPage/LogInPage';
 
-const ProtectedRoute = ({ isAuth, children }) => {
-  if (!isAuth) return <Navigate to="/sign-in" replace />;
-
-  return children;
-};
+const ProtectedRoute = ({ isAuth, children }) => (isAuth ? <Navigate to="login" /> : children);
 
 const AppRoutes = () => {
   const isAuth = Boolean(JSON.parse(localStorage.getItem('user')));
