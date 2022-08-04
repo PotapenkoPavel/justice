@@ -3,7 +3,8 @@ import { Header } from './components/Header/Header';
 import { Footer } from './components/Footer/Footer';
 import MainPage from './pages/Main/MainPage';
 import ArticlesPage from './pages/Articles/ArticlesPage';
-import ArticlePage from './pages/ArticlePage/ArticlePage';
+import AddArticlePage from './pages/AddArticle/AddArticlePage';
+
 
 export const App = () => (
   <>
