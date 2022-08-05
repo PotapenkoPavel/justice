@@ -4,10 +4,12 @@ import { Link } from 'react-router-dom';
 import { Button } from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
 import Input from '../../components/Input/Input';
+
+import useAuth from '../../hooks/useAuth';
+
 import { schema } from './validation-shema';
 
 import './LogInPage.sass';
-import useAuth from '../../hooks/useAuth';
 
 const LogInPage = () => {
   const { login } = useAuth();
