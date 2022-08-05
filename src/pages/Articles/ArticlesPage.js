@@ -17,10 +17,13 @@ const ArticlesPage = () => (
       <div className="articles-page__wrapper">
         <section className="articles-page__author-card">
           <AuthorCard
-            name={AuthorCardData.name}
-            description={AuthorCardData.description}
             img={AuthorCardData.url}
-          />
+          >
+            <div className="author-card__name">{AuthorCardData.name}</div>
+            <div className="author-card__description">
+              {AuthorCardData.description}
+            </div>
+          </AuthorCard>
         </section>
         <section className="articles-page__list">
           <div>
@@ -41,8 +44,8 @@ const ArticlesPage = () => (
             ))}
           </div>
           <div className="articles-page__navigate">
-            <Button type="disabled">Prev</Button>
-            <Button type="outline">Next</Button>
+            <Button theme="disabled">Prev</Button>
+            <Button theme="outline">Next</Button>
           </div>
         </section>
       </div>

@@ -5,24 +5,26 @@
 
   &__content
     display: flex
+    gap: 40px
 
   &__user
     flex: 0 0 30%
 
   &__info
     display: flex
-    align-items: flex-start
-    flex-wrap: wrap
+    flex-direction: column
     flex: 0 0 70%
 
-    .input-wrapper
-      
-      &:nth-child(1)
-        flex: 0 0 calc(50% - 16px)
-        margin-right: 32px
+  &__name-wrapper
+    display: flex
+    gap: 0 32px
+    margin-bottom: 32px
 
-      &:nth-child(2)
-        flex: 0 0 calc(50% - 16px)
+    & .input-wrapper
+      flex: 1 0 auto
 
-      &:nth-child(3)
-        flex: 0 0 100%
+  &__description-wrapper
+    margin-bottom: 48px
+
+    & .input-element
+      height: 155px

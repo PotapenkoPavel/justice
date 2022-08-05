@@ -1,12 +1,13 @@
-import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import { Button } from '../Button/Button';
+import { Nav } from '../Nav/Nav';
+import useAuth from '../../hooks/useAuth';
 
 import './Header.sass';
-import { Nav } from '../Nav/Nav';
 
 export const Header = () => {
-  const [isAuth] = useState(true);
+  const { isAuth } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <header className="header">
@@ -15,10 +16,10 @@ export const Header = () => {
           <img className="logo__img" src="/images/logodark.svg" alt="logo" />
         </div>
 
-        {isAuth ? (<Nav buttonSettings={{ type: 'primary' }} />) : (
+        {isAuth ? (<Nav buttonSettings={{ theme: 'primary' }} />) : (
           <div className="header__auth-block">
-            <Button type="outline">Log in</Button>
-            <Button type="primary">Sign in</Button>
+            <Button theme="outline" onClick={() => navigate('/login')}>Log in</Button>
+            <Button theme="primary" onClick={() => navigate('/sign-in')}>Sign in</Button>
           </div>
         )}
       </div>

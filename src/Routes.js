@@ -1,4 +1,5 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
+import useAuth from './hooks/useAuth';
 import MainPage from './pages/Main/MainPage';
 import ArticlesPage from './pages/Articles/ArticlesPage';
 import AddArticlePage from './pages/AddArticle/AddArticlePage';
@@ -7,10 +8,10 @@ import SignInPage from './pages/SignInPage/SignInPage';
 import LogInPage from './pages/LogInPage/LogInPage';
 import ProfilePage from './pages/ProfilePage/ProfilePage';
 
-const ProtectedRoute = ({ isAuth, children }) => (isAuth ? <Navigate to="login" /> : children);
+const ProtectedRoute = ({ isAuth, children }) => (!isAuth ? <Navigate to="/login" /> : children);
 
 const AppRoutes = () => {
-  const isAuth = Boolean(JSON.parse(localStorage.getItem('user')));
+  const { isAuth } = useAuth();
 
   return (
     <Routes>
@@ -19,28 +20,25 @@ const AppRoutes = () => {
       <Route path="/sign-in" element={<SignInPage />} />
       <Route path="/login" element={<LogInPage />} />
       <Route
-        isAuth={isAuth}
         path="articles"
         element={(
-          <ProtectedRoute>
+          <ProtectedRoute isAuth={isAuth}>
             <ArticlesPage />
           </ProtectedRoute>
         )}
       />
       <Route
-        isAuth={isAuth}
         path="/add-article"
         element={(
-          <ProtectedRoute>
+          <ProtectedRoute isAuth={isAuth}>
             <AddArticlePage />
           </ProtectedRoute>
         )}
       />
       <Route
-        isAuth={isAuth}
         path="/profile"
         element={(
-          <ProtectedRoute>
+          <ProtectedRoute isAuth={isAuth}>
             <ProfilePage />
           </ProtectedRoute>
         )}

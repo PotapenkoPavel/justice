@@ -46,8 +46,7 @@ const ArticlePage = () => {
         <div className="article-page__button">
           <div>
             <Button
-              type="outline"
-              theme="gray"
+              theme="outline gray"
               onClick={() => navigate('/articles')}
             >
               All articles
@@ -70,7 +69,7 @@ const ArticlePage = () => {
               viewsCount="1690"
             />
             <div>
-              <Button type="outline" theme="gray">Typography</Button>
+              <Button theme="outline gray">Typography</Button>
             </div>
           </div>
 
