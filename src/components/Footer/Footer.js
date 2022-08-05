@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router-dom';
+
 import { Button } from '../Button/Button';
 import { Nav } from '../Nav/Nav';
 
-import './Footer.sass';
 import useAuth from '../../hooks/useAuth';
+
+import './Footer.sass';
 
 export const Footer = () => {
   const { isAuth } = useAuth();
