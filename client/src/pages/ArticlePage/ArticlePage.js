@@ -6,7 +6,7 @@ import Tag from '../../components/Tag/Tag';
 
 import './ArticlePage.sass';
 
-const HTML = '<img src="/images/image 14 (1).png" alt="img" />\n'
+const HTML = '<img src="/images/image%2014%20(1).png" alt="img" />\n'
   + '\n'
   + '            <p>\n'
   + '              An Essay on Typography by Eric Gill takes the reader back to the year 1930.\n'
