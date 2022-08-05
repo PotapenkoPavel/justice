@@ -1,6 +1,7 @@
 import Article from '../../components/Atricle/Article';
 import AuthorCard from '../../components/AuthorCard/AuthorCard';
 import { Button } from '../../components/Button/Button';
+
 import { articles } from '../../moc';
 
 import './ArticlesPage.sass';

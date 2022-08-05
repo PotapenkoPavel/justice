@@ -1,6 +1,9 @@
 import cx from 'classnames';
-import ArticleInfo from '../ArticleInfo/ArticleInfo';
+
 import Tag from '../Tag/Tag';
+import Title from '../Title/Title';
+import ArticleInfo from '../ArticleInfo/ArticleInfo';
+
 import './Article.sass';
 
 const Article = ({
@@ -14,7 +17,7 @@ const Article = ({
       <div className="article__tags">
         {tags?.map((tag) => <Tag key={tag}>{tag}</Tag>)}
       </div>
-      <div className="article__title">{title}</div>
+      <Title>{title}</Title>
       <div className="article__description">
         {description}
       </div>

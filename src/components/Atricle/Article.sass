@@ -1,6 +1,7 @@
 .article
   $self: &
   display: flex
+  gap: 0 24px
 
   &__preview-container
     flex-basis: 50%
@@ -10,22 +11,14 @@
 
   &__content
     flex-basis: 50%
-    padding: 0 0 17px 17px
+    padding-bottom: 17px
     border-bottom: 1px solid #EBEBEB
 
   &__tags
     margin-bottom: 24px
 
-  &__title
-    margin-bottom:  16px
-    font-family: 'Playfair Display'
-    font-weight: 700
-    font-size: 32px
-    line-height: 40px
-    color: #242424
-
   &__description
-    margin-bottom: 29px
+    margin: 17px 0 29px 0
     font-family: 'IBM Plex Sans'
     font-size: 16px
     line-height: 26px

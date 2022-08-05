@@ -1,10 +1,12 @@
 import { Formik, Form, Field } from 'formik';
 
-import { schema } from './validation-shema';
 import { Button } from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import Title from '../../components/Title/Title';
+
 import useAuth from '../../hooks/useAuth';
+
+import { schema } from './validation-shema';
 
 import './SignInPage.sass';
 

@@ -1,4 +1,5 @@
 import Avatar from '../Avatar/Avatar';
+
 import './Author.sass';
 
 const Author = ({ name, img }) => (
