@@ -5,6 +5,7 @@ import AddArticlePage from './pages/AddArticle/AddArticlePage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
 import SignInPage from './pages/SignInPage/SignInPage';
 import LogInPage from './pages/LogInPage/LogInPage';
+import ProfilePage from './pages/ProfilePage/ProfilePage';
 
 const ProtectedRoute = ({ isAuth, children }) => (isAuth ? <Navigate to="login" /> : children);
 
@@ -32,6 +33,15 @@ const AppRoutes = () => {
         element={(
           <ProtectedRoute>
             <AddArticlePage />
+          </ProtectedRoute>
+        )}
+      />
+      <Route
+        isAuth={isAuth}
+        path="/profile"
+        element={(
+          <ProtectedRoute>
+            <ProfilePage />
           </ProtectedRoute>
         )}
       />

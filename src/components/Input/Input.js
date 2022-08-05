@@ -12,8 +12,15 @@ const Input = ({
     {touched[field.name]
       && errors[field.name]
         && <div className="input-invalid-feedback">{errors[field.name]}</div>}
-
   </div>
 );
+
+Input.Simple = ({ label = '', ...props }) => (
+  <div className='input-wrapper'>
+    <label className="input-label">{label}</label>
+    <input className="input-element" type="text" {...props} />
+  </div>
+)
+
 export default Input;
 
