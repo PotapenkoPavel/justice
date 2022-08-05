@@ -73,7 +73,7 @@ const AddArticlePage = () => {
             {editorState.getCurrentContent().getPlainText().toString().length}
           </div>
         </div>
-        <Button type="primary" onClick={() => clickHandler()}>Publish an article</Button>
+        <Button theme="primary" onClick={() => clickHandler()}>Publish an article</Button>
       </div>
     </main>
   );

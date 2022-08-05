@@ -35,8 +35,8 @@ const MainPage = () => (
         </div>
 
         <div className="popular-block__navigate">
-          <Button type="disabled">Prev</Button>
-          <Button type="outline">Next</Button>
+          <Button theme="disabled">Prev</Button>
+          <Button theme="outline">Next</Button>
         </div>
       </div>
     </section>

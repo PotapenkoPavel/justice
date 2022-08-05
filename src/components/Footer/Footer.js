@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../Button/Button';
 import { Nav } from '../Nav/Nav';
 
+import useAuth from '../../hooks/useAuth';
+
 import './Footer.sass';
 
 export const Footer = () => {
-  const [isAuth] = useState(true);
+  const { isAuth } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <footer className="footer">
@@ -16,10 +19,10 @@ export const Footer = () => {
             <img className="logo__img" src="/images/logolight.svg" alt="" />
           </div>
 
-          {isAuth ? (<Nav buttonSettings={{ type: 'outline', theme: 'light' }} />) : (
+          {isAuth ? (<Nav buttonSettings={{ theme: 'outline light' }} />) : (
             <div className="footer__auth-block">
-              <Button type="text" theme="light">Log in</Button>
-              <Button type="outline" theme="light">Sign in</Button>
+              <Button theme="text light" onClick={() => navigate('/login')}>Log in</Button>
+              <Button theme="outline light" onClick={() => navigate('/sign-in')}>Sign in</Button>
             </div>
           )}
 
