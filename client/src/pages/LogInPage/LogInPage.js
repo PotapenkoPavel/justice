@@ -5,15 +5,13 @@ import { Button } from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
 import Input from '../../components/Input/Input';
 
-import useAuth from '../../hooks/useAuth';
-
 import { schema } from './validation-shema';
 
 import './LogInPage.sass';
+import { useLoginMutation } from '../../redux/api/auth.api';
 
 const LogInPage = () => {
-  const { login } = useAuth();
-
+  const [login] = useLoginMutation();
   return (
     <section className="login-page">
       <div className="container">
@@ -25,7 +23,9 @@ const LogInPage = () => {
             password: '',
           }}
           validationSchema={schema}
-          onSubmit={(values) => login(values)}
+          onSubmit={(values) => {
+            login(values);
+          }}
         >
           <Form className="login-page__form">
             <Field component={Input.Validate} name="email" label="Email Address" />

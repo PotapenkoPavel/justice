@@ -8,17 +8,9 @@ import Input from '../../components/Input/Input';
 import './ProfilePage.sass';
 
 const ProfilePage = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
-
-  const [firstName, setFirstName] = useState(user.firstName);
-  const [lastName, setLastName] = useState(user.lastName);
-  const [description, setDescription] = useState(user.description);
-
-  const saveChanges = () => {
-    localStorage.setItem('user', JSON.stringify({
-      ...user, firstName, lastName, description,
-    }));
-  };
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [description, setDescription] = useState();
 
   return (
     <main className="profile-page">
@@ -47,7 +39,7 @@ const ProfilePage = () => {
               />
             </div>
             <div>
-              <Button theme="primary" onClick={saveChanges}>Save Changes</Button>
+              <Button theme="primary" onClick={() => {}}>Save Changes</Button>
             </div>
           </div>
         </section>

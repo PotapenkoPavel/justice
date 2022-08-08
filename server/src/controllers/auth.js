@@ -59,7 +59,7 @@ const login = async (req, res) => {
       { expiresIn: "7 days"}
     )
 
-    return res.status(200).json({ message: 'Welcome!', token })
+    return res.status(200).json({ status: 200, token })
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

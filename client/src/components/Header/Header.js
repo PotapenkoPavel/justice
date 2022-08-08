@@ -1,14 +1,13 @@
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 import { Button } from '../Button/Button';
 import { Nav } from '../Nav/Nav';
 
-import useAuth from '../../hooks/useAuth';
-
 import './Header.sass';
 
 export const Header = () => {
-  const { isAuth } = useAuth();
+  const isAuth = useSelector((state) => state.authReducer.isAuth);
   const navigate = useNavigate();
 
   return (
