@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema({
   email: {
@@ -10,7 +10,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
     minLength: 6,
-    match: new RegExp(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&]).*$/),
+    match: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&]).*$/,
   },
   firstName: {
     type: String,
@@ -26,4 +26,4 @@ const userSchema = new Schema({
   },
 });
 
-module.exports = model("User", userSchema);
+module.exports = model('User', userSchema);
