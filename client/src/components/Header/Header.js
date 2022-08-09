@@ -7,13 +7,13 @@ import { Nav } from '../Nav/Nav';
 import './Header.sass';
 
 export const Header = () => {
-  const isAuth = useSelector((state) => state.authReducer.isAuth);
   const navigate = useNavigate();
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <header className="header">
       <div className="container header__container">
-        <div className="logo">
+        <div className="logo" onClick={() => navigate('/')}>
           <img className="logo__img" src="/images/logodark.svg" alt="logo" />
         </div>
 

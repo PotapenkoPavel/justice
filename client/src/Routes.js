@@ -12,14 +12,20 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 const ProtectedRoute = ({ isAuth, children }) => (!isAuth ? <Navigate to="/login" /> : children);
 
 const AppRoutes = () => {
-  const isAuth = useSelector((state) => state.authReducer.isAuth);
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="/*" element={<MainPage />} />
       <Route path="/article/:id" element={<ArticlePage />} />
-      <Route path="/sign-in" element={<SignInPage />} />
-      <Route path="/login" element={<LogInPage />} />
+
+      {isAuth ? null : (
+        <>
+          <Route path="/sign-in" element={<SignInPage />} />
+          <Route path="/login" element={<LogInPage />} />
+        </>
+      )}
+
       <Route
         path="articles"
         element={(

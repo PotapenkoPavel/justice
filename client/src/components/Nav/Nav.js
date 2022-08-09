@@ -1,12 +1,17 @@
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Button } from '../Button/Button';
 
-import useAuth from '../../hooks/useAuth';
+import { logout } from '../../redux/actions/auth';
 
 import './Nav.sass';
 
 export const Nav = ({ buttonSettings }) => {
-  const { logout } = useAuth();
+  const dispatch = useDispatch();
+
+  const clickHandler = () => {
+    dispatch(logout());
+  };
 
   return (
     <nav className="nav">
@@ -16,7 +21,7 @@ export const Nav = ({ buttonSettings }) => {
         <li className="nav__item"><Link className="nav__link" to="/add-article">Add article</Link></li>
         <li className="nav__item"><Link className="nav__link" to="/profile">Profile</Link></li>
       </ul>
-      <Button {...buttonSettings} onClick={() => logout()}>Logout</Button>
+      <Button {...buttonSettings} onClick={clickHandler}>Logout</Button>
     </nav>
   );
 };
