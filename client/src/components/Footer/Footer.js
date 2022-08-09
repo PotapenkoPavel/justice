@@ -1,21 +1,20 @@
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../Button/Button';
 import { Nav } from '../Nav/Nav';
 
-import useAuth from '../../hooks/useAuth';
-
 import './Footer.sass';
 
 export const Footer = () => {
-  const { isAuth } = useAuth();
   const navigate = useNavigate();
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <footer className="footer">
       <div className="container footer__container">
         <div className="footer__head">
-          <div className="logo">
+          <div className="logo" onClick={() => navigate('/')}>
             <img className="logo__img" src="/images/logolight.svg" alt="" />
           </div>
 

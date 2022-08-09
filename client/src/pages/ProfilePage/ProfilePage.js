@@ -8,15 +8,18 @@ import Input from '../../components/Input/Input';
 import './ProfilePage.sass';
 
 const ProfilePage = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+  const { user, token } = JSON.parse(localStorage.getItem('auth'));
 
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [description, setDescription] = useState(user.description);
+  const [description, setDescription] = useState('');
 
   const saveChanges = () => {
-    localStorage.setItem('user', JSON.stringify({
-      ...user, firstName, lastName, description,
+    localStorage.setItem('auth', JSON.stringify({
+      token,
+      user: {
+        ...user, firstName, lastName, description,
+      },
     }));
   };
 

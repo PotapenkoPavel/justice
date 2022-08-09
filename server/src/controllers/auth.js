@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/user');
 const config = require('../config/keys')
+const {decode} = require("jsonwebtoken");
 
 const register = async (req, res) => {
   try {
@@ -28,12 +29,17 @@ const register = async (req, res) => {
     const { _id } = await user.save();
 
     const token = jwt.sign(
-      { userId: _id, email },
+      { _id, email, firstName, lastName },
       config.JWTSecret,
       { expiresIn: "7 days"}
     )
 
-    return res.status(200).json({ message: 'user created', token });
+    const responseData = {
+      token,
+      user: { _id, email, firstName, lastName }
+    }
+
+    return res.status(200).json(responseData);
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -54,15 +60,57 @@ const login = async (req, res) => {
       return res.status(400).json({ message: "Please provide a valid email or password"})
 
     const token = jwt.sign(
-      { userId: candidate._id, email },
+      { email,
+        _id: candidate.id,
+        firstName: candidate.firstName,
+        lastName: candidate.lastName
+      },
       config.JWTSecret,
       { expiresIn: "7 days"}
     )
 
-    return res.status(200).json({ message: 'Welcome!', token })
+    const responseData = {
+      token,
+      user: {
+        email,
+        _id: candidate.id,
+        firstName: candidate.firstName,
+        lastName: candidate.lastName
+      }
+    }
+
+    return res.status(200).json(responseData)
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
 };
 
-module.exports = { register, login };
+const verifyToken = async (req, res) => {
+  try {
+    const authorization = req.headers.authorization
+
+    if (authorization && authorization.includes('Bearer')) {
+      const token = authorization.slice(7)
+
+      const decoded = jwt.verify(token, config.JWTSecret)
+
+      return res.status(200).json({
+        token,
+        user: {
+          _id: decoded._id,
+          email: decoded.email,
+          firstName: decoded.firstName,
+          lastName:  decoded. lastName
+        }
+      })
+    }
+    return res.status(401).json({ message: 'ivalid token'})
+  } catch (err) {
+    return res.status(401).json({ message: 'invalid token' })
+  }
+
+
+  return res.status(200).json({ message: 'verify-token endpoint' })
+}
+
+module.exports = { register, login, verifyToken };

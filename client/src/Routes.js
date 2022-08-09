@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
-import useAuth from './hooks/useAuth';
 import MainPage from './pages/Main/MainPage';
 import ArticlesPage from './pages/Articles/ArticlesPage';
 import AddArticlePage from './pages/AddArticle/AddArticlePage';
@@ -12,14 +12,20 @@ import ProfilePage from './pages/ProfilePage/ProfilePage';
 const ProtectedRoute = ({ isAuth, children }) => (!isAuth ? <Navigate to="/login" /> : children);
 
 const AppRoutes = () => {
-  const { isAuth } = useAuth();
+  const isAuth = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <Routes>
-      <Route path="/" element={<MainPage />} />
+      <Route path="/*" element={<MainPage />} />
       <Route path="/article/:id" element={<ArticlePage />} />
-      <Route path="/sign-in" element={<SignInPage />} />
-      <Route path="/login" element={<LogInPage />} />
+
+      {!isAuth && (
+      <>
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/login" element={<LogInPage />} />
+      </>
+      )}
+
       <Route
         path="articles"
         element={(

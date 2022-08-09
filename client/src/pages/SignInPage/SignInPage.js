@@ -1,17 +1,30 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Formik, Form, Field } from 'formik';
+import { ToastContainer } from 'react-toastify';
 
+import { useEffect } from 'react';
 import { Button } from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
 import Title from '../../components/Title/Title';
 
-import useAuth from '../../hooks/useAuth';
-
+import { useShowMessage } from '../../hooks/useShowMessage';
+import { register, setError } from '../../redux/actions/auth';
 import { schema } from './validation-shema';
 
 import './SignInPage.sass';
 
 const SignInPage = () => {
-  const { register } = useAuth();
+  const error = useSelector((state) => state.auth.error);
+  const { showMessage } = useShowMessage(setError);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    showMessage(error && error.message);
+  }, [error]);
+
+  const submitHandler = (values) => {
+    dispatch(register(values));
+  };
 
   return (
     <main className="sign-in">
@@ -24,18 +37,19 @@ const SignInPage = () => {
             email: '',
             password: '',
           }}
-          onSubmit={(values) => register(values)}
+          onSubmit={submitHandler}
           validationSchema={schema}
         >
           <Form className="sign-in__form">
             <Field component={Input.Validate} name="firstName" label="First Name" />
             <Field component={Input.Validate} name="lastName" label="Last name" />
-            <Field component={Input.Validate} name="email" label="Email Address" />
-            <Field component={Input.Validate} name="password" label="Password" />
+            <Field component={Input.Validate} name="email" label="Email Address" type="email" />
+            <Field component={Input.Validate} name="password" label="Password" type="password" />
             <Button theme="primary" type="submit">Create Account</Button>
           </Form>
         </Formik>
       </div>
+      <ToastContainer />
     </main>
   );
 };
