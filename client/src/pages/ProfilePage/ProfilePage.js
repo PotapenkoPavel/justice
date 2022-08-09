@@ -8,9 +8,20 @@ import Input from '../../components/Input/Input';
 import './ProfilePage.sass';
 
 const ProfilePage = () => {
-  const [firstName, setFirstName] = useState();
-  const [lastName, setLastName] = useState();
-  const [description, setDescription] = useState();
+  const { user, token } = JSON.parse(localStorage.getItem('auth'));
+
+  const [firstName, setFirstName] = useState(user.firstName);
+  const [lastName, setLastName] = useState(user.lastName);
+  const [description, setDescription] = useState('');
+
+  const saveChanges = () => {
+    localStorage.setItem('auth', JSON.stringify({
+      token,
+      user: {
+        ...user, firstName, lastName, description,
+      },
+    }));
+  };
 
   return (
     <main className="profile-page">
@@ -39,7 +50,7 @@ const ProfilePage = () => {
               />
             </div>
             <div>
-              <Button theme="primary" onClick={() => {}}>Save Changes</Button>
+              <Button theme="primary" onClick={saveChanges}>Save Changes</Button>
             </div>
           </div>
         </section>

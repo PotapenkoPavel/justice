@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { apiConfig } from '../../config/api';
 import {
   TRY_AUTHENTICATE, LOGIN, AUTH_SET_ERROR, AUTH_SET_LOADING, LOGOUT, REGISTER,
 } from '../actionTypes/auth';
@@ -11,7 +12,7 @@ export const setLoading = (value) => ({
 
 export const setError = (err) => ({
   type: AUTH_SET_ERROR,
-  payload: err,
+  payload: err || null,
 });
 
 export const tryAuthenticate = () => async (dispatch) => {
@@ -21,7 +22,7 @@ export const tryAuthenticate = () => async (dispatch) => {
     if (dataFromLocalStorage) {
       const { token } = JSON.parse(dataFromLocalStorage);
 
-      const { status, data } = await axios.get('http://localhost:5050/api/auth/verify-token', {
+      const { status, data } = await axios.get(`${apiConfig.authURL}/verify-token`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -50,7 +51,7 @@ export const login = ({ email, password }) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
 
-    const response = await axios.post('http://localhost:5050/api/auth/login', {
+    const response = await axios.post(`${apiConfig.authURL}/login`, {
       email, password,
     });
 
@@ -76,7 +77,7 @@ export const register = ({
   try {
     dispatch(setLoading(true));
 
-    const response = await axios.post('http://localhost:5050/api/auth/register', {
+    const response = await axios.post(`${apiConfig.authURL}/register`, {
       email, password, firstName, lastName,
     });
 

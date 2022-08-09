@@ -19,11 +19,11 @@ const AppRoutes = () => {
       <Route path="/*" element={<MainPage />} />
       <Route path="/article/:id" element={<ArticlePage />} />
 
-      {isAuth ? null : (
-        <>
-          <Route path="/sign-in" element={<SignInPage />} />
-          <Route path="/login" element={<LogInPage />} />
-        </>
+      {!isAuth && (
+      <>
+        <Route path="/sign-in" element={<SignInPage />} />
+        <Route path="/login" element={<LogInPage />} />
+      </>
       )}
 
       <Route
