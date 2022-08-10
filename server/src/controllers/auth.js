@@ -85,26 +85,22 @@ const login = async (req, res) => {
   }
 };
 
-const verifyToken = async (req, res) => {
+const sendTokenPayload = async (req, res) => {
   try {
-    const authorization = req.headers.authorization
+    const token = req.token
+    const { _id, email, firstName, lastName } = req.tokenPayload
 
-    if (authorization && authorization.includes('Bearer')) {
-      const token = authorization.slice(7)
-
-      const decoded = jwt.verify(token, config.JWTSecret)
-
-      return res.status(200).json({
-        token,
-        user: {
-          _id: decoded._id,
-          email: decoded.email,
-          firstName: decoded.firstName,
-          lastName:  decoded. lastName
-        }
-      })
+    const response = {
+      token,
+      user: {
+        _id,
+        email,
+        firstName,
+        lastName
+      }
     }
-    return res.status(401).json({ message: 'ivalid token'})
+
+    return res.status(200).json(response)
   } catch (err) {
     return res.status(401).json({ message: 'invalid token' })
   }
@@ -113,4 +109,4 @@ const verifyToken = async (req, res) => {
   return res.status(200).json({ message: 'verify-token endpoint' })
 }
 
-module.exports = { register, login, verifyToken };
+module.exports = { register, login, sendTokenPayload };

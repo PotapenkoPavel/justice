@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose')
 
-const schema = new Schema({
+const uploadImageSchema = new Schema({
   filename: {
     type: String,
     unique: true,
@@ -16,4 +16,4 @@ const schema = new Schema({
   }
 })
 
-module.exports = model('UploadImage', schema)
+module.exports = model('UploadImage', uploadImageSchema)

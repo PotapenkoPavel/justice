@@ -1,7 +1,11 @@
 const { Schema, Types, model } = require('mongoose')
 
-const schema = new Schema({
+const articleSchema = new Schema({
   title: {
+    type: String,
+    required: true
+  },
+  tag: {
     type: String,
     required: true
   },
@@ -25,13 +29,10 @@ const schema = new Schema({
   timestamp: {
     type: Date
   },
-  tag: {
-    type: String,
-    required: true
-  },
   viewsCount: {
-    type: Number
+    type: Number,
+    default: 0
   }
 })
 
-module.exports = model('Article', schema)
+module.exports = model('Article', articleSchema)
