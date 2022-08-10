@@ -24,6 +24,9 @@ const userSchema = new Schema({
     type: String,
     maxLength: 1024,
   },
+  image: {
+    type: String
+  }
 });
 
 module.exports = model('User', userSchema);
