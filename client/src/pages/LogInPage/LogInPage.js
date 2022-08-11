@@ -9,7 +9,7 @@ import Title from '../../components/Title/Title';
 import Input from '../../components/Input/Input';
 
 import { useShowMessage } from '../../hooks/useShowMessage';
-import { login, setError } from '../../redux/actions/auth';
+import { login, setError } from '../../redux/actionCreators/auth';
 import { schema } from './validation-shema';
 
 import 'react-toastify/dist/ReactToastify.css';

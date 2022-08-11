@@ -5,7 +5,7 @@ import { Footer } from './components/Footer/Footer';
 
 import AppRoutes from './Routes';
 
-import { tryAuthenticate } from './redux/actions/auth';
+import { tryAuthenticate } from './redux/actionCreators/auth';
 
 export const App = () => {
   const dispatch = useDispatch();

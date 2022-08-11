@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, Types, model } = require('mongoose');
 
 const userSchema = new Schema({
   email: {
@@ -23,10 +23,27 @@ const userSchema = new Schema({
   description: {
     type: String,
     maxLength: 1024,
+    default: null
   },
-  image: {
-    type: String
+  avatar: {
+    type: Types.ObjectId,
+    ref: 'UploadImage',
+    default: null
   }
 });
+
+userSchema.virtual('id').get(function() {
+  return this._id.toHexString();
+});
+
+userSchema.set('toObject', {
+  virtuals: true,
+  versionKey: false,
+})
+
+userSchema.set('toJSON', {
+  virtuals: true,
+  versionKey: false,
+})
 
 module.exports = model('User', userSchema);

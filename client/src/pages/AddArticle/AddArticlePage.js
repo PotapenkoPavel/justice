@@ -34,13 +34,15 @@ const AddArticlePage = () => {
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState('');
   const [previewText, setPreviewText] = useState('');
-  const userId = useSelector((state) => state.auth.user._id);
+  const userId = useSelector((state) => state.user.id);
   const ref = createRef();
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
     const file = e.target.file.files[0];
+
+    console.log(file);
 
     const data = new FormData();
     data.append('previewImage', file);

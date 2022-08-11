@@ -5,7 +5,6 @@ import {
 const initialState = {
   isAuthenticated: false,
   token: null,
-  user: null,
   error: null,
   isLoading: false,
 };
@@ -16,21 +15,20 @@ export const authReducer = (state = initialState, action) => {
     case TRY_AUTHENTICATE:
       return action.payload ? {
         ...state,
-        user: action.payload.user,
         token: action.payload.token,
         isAuthenticated: action.payload.isAuthenticated,
       } : { ...state };
     case LOGIN:
       return {
-        ...state, user: action.payload.user, token: action.payload.token, isAuthenticated: true,
+        ...state, token: action.payload.token, isAuthenticated: true,
       };
     case REGISTER:
       return {
-        ...state, user: action.payload.user, token: action.payload.token, isAuthenticated: true,
+        ...state, token: action.payload.token, isAuthenticated: true,
       };
     case LOGOUT:
       return {
-        ...state, user: null, token: null, isAuthenticated: false,
+        ...state, token: null, isAuthenticated: false,
       };
     case AUTH_SET_LOADING:
       return { ...state, isLoading: action.payload };

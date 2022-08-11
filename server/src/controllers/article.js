@@ -2,7 +2,6 @@ const Article = require('../models/article')
 const UploadImage = require('../models/uploadImage')
 const fs = require("fs");
 
-
 const getArticles = async (req, res) => {
   try {
     const articles = await Article.find().limit(10)
@@ -79,7 +78,6 @@ const addArticle = async (req, res) => {
     return res.status(500).json({ error })
   }
 }
-
 
 module.exports = {
   getArticles,
