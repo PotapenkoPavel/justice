@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+// import axios from 'axios';
 
 import Article from '../../components/Atricle/Article';
 import AuthorCard from '../../components/AuthorCard/AuthorCard';
@@ -9,9 +11,20 @@ import { articles } from '../../moc';
 import './ArticlesPage.sass';
 
 const ArticlesPage = () => {
-  const {
-    firstName, lastName, description, avatar,
-  } = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
+  // const token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+
+  }, []);
+
+  // const fetchArticles = async () => {
+  //   const response = await axios.get(`http://localhost:5050/api/article/owner/${user._id}`, null, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
+  // };
 
   return (
     <main className="articles-page">
@@ -20,29 +33,29 @@ const ArticlesPage = () => {
           <section className="articles-page__author-card">
             <AuthorCard
               img={
-               avatar
-                 ? `data:${avatar.contentType};base64, ${avatar.imageBase64}`
-                 : '/images/avatar123.jpg'
+                user.avatar
+                  ? `data:${user.avatar.contentType};base64, ${user.avatar.imageBase64}`
+                  : '/images/avatar123.jpg'
               }
             >
-              <div className="author-card__name">{`${firstName} ${lastName}`}</div>
+              <div className="author-card__name">{`${user.firstName} ${user.lastName}`}</div>
               <div className="author-card__description">
-                {description}
+                {user.description}
               </div>
             </AuthorCard>
           </section>
           <section className="articles-page__list">
             <div>
               {articles.map(({
-                id, previewUrl, tags, title, desc, viewsCount, date, author,
+                id, previewUrl, tags, title, description, viewsCount, date, author,
               }) => (
                 <Article
                   key={id}
                   previewUrl={previewUrl}
                   tags={tags}
                   title={title}
-                  description={desc}
-                  viewsCount={viewsCount}
+                  description={description}
+                  views={viewsCount}
                   date={date}
                   author={author}
                   type="column"

@@ -22,8 +22,10 @@ const SignInPage = () => {
     showMessage(error && error.message);
   }, [error]);
 
-  const submitHandler = (values) => {
-    dispatch(register(values));
+  const submitHandler = ({
+    email, password, firstName, lastName,
+  }) => {
+    dispatch(register(email, password, firstName, lastName));
   };
 
   return (

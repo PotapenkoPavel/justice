@@ -25,7 +25,7 @@ const ProfilePage = () => {
   const changeAvatarHandler = (e) => {
     const file = e.target.files[0];
 
-    dispatch(updateUserAvatar(file, user._id, token));
+    dispatch(updateUserAvatar(user._id, file, token));
   };
 
   const deletePhotoHandler = () => {

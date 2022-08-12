@@ -9,35 +9,39 @@
     justify-content: center
     flex-basis: 30%
 
-  &__content
+  &__content-wrapper
     flex-basis: 70%
     margin-bottom: 25px
+    padding-bottom: 25px
     border-bottom: 1px solid #EDEDED
 
+  &__content
+
     img
-      width: 100%
-      height: auto
+      display: block
+      width: 100% !important
+      height: auto !important
       margin: 32px 0 32px 0
 
     p
       margin-bottom: 26px
-      font-family: 'IBM Plex Sans'
       font-style: normal
       font-weight: 400
       font-size: 16px
       line-height: 26px
+      text-align: justify
       color: #8C8C8C
 
   &__title
     margin-top: 16px
-    font-family: 'Playfair Display'
     font-style: normal
     font-weight: 700
     font-size: 48px
     line-height: 60px
     color: #282828
 
-  &__content-footer
+  &__footer
     display: flex
     justify-content: space-between
     align-items: center
+    margin-top: 50px

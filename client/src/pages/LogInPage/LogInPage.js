@@ -20,8 +20,8 @@ const LogInPage = () => {
   const dispatch = useDispatch();
   const { showMessage } = useShowMessage(setError);
 
-  const submitHandler = (values) => {
-    dispatch(login(values));
+  const submitHandler = ({ email, password }) => {
+    dispatch(login(email, password));
   };
 
   useEffect(() => {

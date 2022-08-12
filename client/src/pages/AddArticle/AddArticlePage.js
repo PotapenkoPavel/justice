@@ -45,11 +45,11 @@ const AddArticlePage = () => {
 
     const data = new FormData();
     data.append('previewImage', file);
-    data.append('previewText', previewText);
+    data.append('description', previewText);
     data.append('title', title);
     data.append('tag', tag);
     data.append('HTML', draftToHtml(convertToRaw(editorState.getCurrentContent())));
-    data.append('author', userId);
+    data.append('userId', userId);
 
     axios.post('http://localhost:5050/api/article/', data, {
       headers: {

@@ -10,7 +10,7 @@ const getUser = async (req, res) => {
 
     if (!user) res.status(400).json({ message: 'Cannot find user' })
 
-    res.status(200).json({ user })
+    res.status(200).json(user)
   } catch (error) {
     res.status(500).json({ message: error.message })
   }
@@ -70,7 +70,7 @@ const deleteUserAvatar = async (req, res) => {
 
     await User.findByIdAndUpdate(userId, { avatar: null })
 
-    res.status(204)
+    res.status(204).json({})
   } catch(error) {
     res.status(500).json({ message: error.message })
   }

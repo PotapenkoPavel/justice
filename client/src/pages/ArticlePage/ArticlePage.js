@@ -1,21 +1,26 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { Button } from '../../components/Button/Button';
 import ArticleInfo from '../../components/ArticleInfo/ArticleInfo';
 import Tag from '../../components/Tag/Tag';
+import ArticleApi from '../../services/article';
 
 import './ArticlePage.sass';
 
 const ArticlePage = () => {
-  const navigate = useNavigate();
   const [article, setArticle] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-  useEffect(async () => {
-    const { data } = await axios.get('http://localhost:5050/api/article/62f5522316a1c3bc94e1d670');
+  useEffect(() => {
+    const fetchArticle = async () => {
+      const response = await ArticleApi.getArticleById(id);
 
-    setArticle(data);
+      setArticle(response.data);
+    };
+
+    fetchArticle();
   }, []);
 
   if (!article) return null;
@@ -27,29 +32,28 @@ const ArticlePage = () => {
           <div>
             <Button
               theme="outline gray"
-              onClick={() => navigate('/articles')}
+              onClick={() => navigate('/')}
             >
               All articles
             </Button>
           </div>
         </div>
-        <section className="article-page__content">
+        <section className="article-page__content-wrapper">
           <Tag>{article.tag}</Tag>
 
           <div className="article-page__title">{article.title}</div>
 
-          <div>
-            <div dangerouslySetInnerHTML={{ __html: article.HTML }} />
-          </div>
+          <div className="article-page__content" dangerouslySetInnerHTML={{ __html: article.HTML }} />
 
-          <div className="article-page__content-footer">
+          <div className="article-page__footer">
             <ArticleInfo
-              author={{ avatarUrl: '/images/avatar1.png', name: 'Janay Wright' }}
-              date="Jun 13 · 5 min read"
-              viewsCount="1690"
+              author={article.author}
+              timestamp={article.timestamp}
+              readTime={article.readTimeInMinutes}
+              views={article.views}
             />
             <div>
-              <Button theme="outline gray">Typography</Button>
+              <Button theme="outline gray">{article.tag}</Button>
             </div>
           </div>
 

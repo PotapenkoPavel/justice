@@ -17,11 +17,11 @@ const articleSchema = new Schema({
     type: String,
     required: true
   },
-  previewImage: {
+  img: {
     type: Types.ObjectId,
     ref: 'UploadImage'
   },
-  previewText: {
+  description: {
     type: String,
     required: true,
     maxLength: 2048,
@@ -29,7 +29,11 @@ const articleSchema = new Schema({
   timestamp: {
     type: Date
   },
-  viewsCount: {
+  readTimeInMinutes: {
+    type: Number,
+    required: true
+  },
+  views: {
     type: Number,
     default: 0
   }

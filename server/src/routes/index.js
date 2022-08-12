@@ -34,7 +34,7 @@ router.get('/article/:id', getArticleById)
 router.post('/article', verifyToken, upload.single('previewImage'), addArticle)
 
 // user
-router.get('/user/:id', getUser)
+router.get('/user/:id', verifyToken, getUser)
 
 router.patch('/user/:id', verifyToken, updateUserData)
 
@@ -43,11 +43,13 @@ router.patch('/user/:id/avatar', verifyToken, upload.single('avatar'), updateUse
 router.delete('/user/:id/avatar', verifyToken, deleteUserAvatar)
 
 router.get('/test', async (req, res) => {
-  const users = await User.remove()
-  const articles = await Article.remove()
-  const images = await UploadImage.remove()
+  // const users = await User.remove()
+  // const articles = await Article.remove()
+  // const images = await UploadImage.remove()
 
-  console.log(users,articles,images)
+  // console.log(users,articles,images)
+
+  await Article.findByIdAndDelete("62f63e0fde80707d14e70938")
 })
 
 module.exports = router;
