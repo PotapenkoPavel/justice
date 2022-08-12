@@ -32,18 +32,7 @@ const userSchema = new Schema({
   }
 });
 
-userSchema.virtual('id').get(function() {
-  return this._id.toHexString();
-});
-
-userSchema.set('toObject', {
-  virtuals: true,
-  versionKey: false,
-})
-
-userSchema.set('toJSON', {
-  virtuals: true,
-  versionKey: false,
-})
+userSchema.set('toObject', { versionKey: false })
+userSchema.set('toJSON', { versionKey: false })
 
 module.exports = model('User', userSchema);

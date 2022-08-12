@@ -19,17 +19,17 @@ const ProfilePage = () => {
   const [description, setDescription] = useState(user.description);
 
   const saveChanges = () => {
-    dispatch(updateUserInformation(firstName, lastName, description, user.id, token));
+    dispatch(updateUserInformation(firstName, lastName, description, user._id, token));
   };
 
   const changeAvatarHandler = (e) => {
     const file = e.target.files[0];
 
-    dispatch(updateUserAvatar(file, user.id, token));
+    dispatch(updateUserAvatar(file, user._id, token));
   };
 
   const deletePhotoHandler = () => {
-    dispatch(deleteUserAvatar(user.id, token));
+    dispatch(deleteUserAvatar(user._id, token));
   };
 
   return (
@@ -42,7 +42,7 @@ const ProfilePage = () => {
             <AuthorCard
               img={
               user.avatar
-                ? `data:${user.avatar.mimetype};base64, ${user.avatar.imageBase64}`
+                ? `data:${user.avatar.contentType};base64, ${user.avatar.imageBase64}`
                 : '/images/avatar123.jpg'
             }
             >

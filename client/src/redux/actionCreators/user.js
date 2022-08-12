@@ -29,20 +29,28 @@ export const setUser = (user) => async (dispatch) => {
 
   return dispatch({
     type: SET_USER,
-    payload: { user },
+    payload: user,
   });
 };
 
 export const fetchUser = (id) => async (dispatch) => {
-  const { data: user } = await axios.get(`http://localhost:5050/api/user/${id}`);
+  try {
+    dispatch(setLoading(true));
+    const { status, data: user } = await axios.get(`http://localhost:5050/api/user/${id}`);
 
-  dispatch(setUser(user));
+    if (status === 200) dispatch(setUser(user));
+
+    dispatch(setLoading(false));
+  } catch (error) {
+    dispatch(setLoading(false));
+    dispatch(setError(error.message));
+  }
 };
 
 export const updateUserInformation = (firstName, lastName, description, userId, token) => async (dispatch) => {
   try {
     dispatch(setLoading(true));
-    const { status, data } = await axios.patch(`http://localhost:5050/api/user/${userId}`, {
+    const { status } = await axios.patch(`http://localhost:5050/api/user/${userId}`, {
       firstName,
       lastName,
       description,
@@ -55,7 +63,7 @@ export const updateUserInformation = (firstName, lastName, description, userId, 
     if (status === 200) {
       dispatch({
         type: UPDATE_USER_INFORMATION,
-        payload: data,
+        payload: { firstName, lastName, description },
       });
     }
     dispatch(setLoading(false));
@@ -66,37 +74,51 @@ export const updateUserInformation = (firstName, lastName, description, userId, 
 };
 
 export const deleteUserAvatar = (userId, token) => async (dispatch) => {
-  const { status, data } = await axios.delete(`http://localhost:5050/api/user/${userId}/avatar`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  try {
+    const { status } = await axios.delete(`http://localhost:5050/api/user/${userId}/avatar`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  if (status !== 200) {
-    return dispatch(setError(data.message));
+    if (status === 204) {
+      dispatch({
+        type: DELETE_USER_AVATAR,
+      });
+    }
+
+    dispatch(setLoading(false));
+  } catch (error) {
+    dispatch(setLoading(false));
+    dispatch(setError(error.message));
   }
-
-  return dispatch({
-    type: DELETE_USER_AVATAR,
-  });
 };
 
 export const updateUserAvatar = (file, userId, token) => async (dispatch) => {
-  const { status, data } = await axios.patch(`http://localhost:5050/api/user/${userId}/avatar`, {
-    avatar: file,
-  }, {
-    headers: {
-      'Content-Type': 'multipart/form-data',
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  try {
+    const { status, data } = await axios.patch(`http://localhost:5050/api/user/${userId}/avatar`, {
+      avatar: file,
+    }, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  if (status !== 200) {
-    return dispatch(setError(data.message));
+    if (status === 200) {
+      const { imageBase64, contentType } = data;
+
+      dispatch({
+        type: UPDATE_USER_AVATAR,
+        payload: {
+          imageBase64,
+          contentType,
+        },
+      });
+    }
+    dispatch(setLoading(false));
+  } catch (error) {
+    dispatch(setLoading(false));
+    dispatch(setError(error.message));
   }
-
-  return dispatch({
-    type: UPDATE_USER_AVATAR,
-    payload: data,
-  });
 };

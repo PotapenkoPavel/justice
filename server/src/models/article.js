@@ -35,4 +35,7 @@ const articleSchema = new Schema({
   }
 })
 
+articleSchema.set('toObject', { versionKey: false })
+articleSchema.set('toJSON', { versionKey: false })
+
 module.exports = model('Article', articleSchema)

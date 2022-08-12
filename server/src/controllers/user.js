@@ -6,17 +6,13 @@ const getUser = async (req, res) => {
   try {
     const { id } = req.params
 
-    const user = await User.findById(id).populate('avatar', '-_id -__v -filename')
+    const user = await User.findById(id, null, { select: '-password'}).populate('avatar')
 
     if (!user) res.status(400).json({ message: 'Cannot find user' })
 
-    const { email, firstName, lastName, description, avatar} = user
-
-    console.log(user)
-
-    res.status(200).json({ id, email, firstName, lastName, description, avatar })
+    res.status(200).json({ user })
   } catch (error) {
-    res.status(500).json({ error })
+    res.status(500).json({ message: error.message })
   }
 }
 
@@ -29,7 +25,7 @@ const updateUserData = async (req, res) => {
       return res.status(400).json({ message: 'Please provide firstName, lastName, and description of user for update information '})
     }
 
-    const user = await User.findOneAndUpdate({ _id: id }, {
+    const user = await User.findByIdAndUpdate(id, {
       firstName,
       lastName,
       description
@@ -55,16 +51,16 @@ const updateUserAvatar = async (req, res) => {
       imageBase64
     })
 
-    const { _id: imageId } = await uploadImage.save()
+    const avatar = await uploadImage.save()
 
     // update user avatar
     const { id } = req.params
 
-    await User.findByIdAndUpdate(id, { avatar: imageId })
+    await User.findByIdAndUpdate(id, { avatar: avatar._id })
 
-    return res.status(200).json({ mimetype: file.mimetype, imageBase64 })
+    return res.status(200).json(avatar)
   } catch(error) {
-    return res.status(500).json({ error })
+    return res.status(500).json({ message: error.message })
   }
 }
 
@@ -72,13 +68,11 @@ const deleteUserAvatar = async (req, res) => {
   try {
     const { id: userId } = req.params
 
-    const { id, email, firstName, lastName, description, avatar } = await User.findByIdAndUpdate(userId, { avatar: null }, { new: true })
+    await User.findByIdAndUpdate(userId, { avatar: null })
 
-    const response = { id, email, firstName, lastName, description, avatar }
-
-    res.status(200).json(response)
+    res.status(204)
   } catch(error) {
-    res.status(500).json({ error: error.message })
+    res.status(500).json({ message: error.message })
   }
 }
 

@@ -34,15 +34,14 @@ const AddArticlePage = () => {
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState('');
   const [previewText, setPreviewText] = useState('');
-  const userId = useSelector((state) => state.user.id);
+  const token = useSelector((state) => state.auth.token);
+  const userId = useSelector((state) => state.user._id);
   const ref = createRef();
 
   const submitHandler = async (e) => {
     e.preventDefault();
 
     const file = e.target.file.files[0];
-
-    console.log(file);
 
     const data = new FormData();
     data.append('previewImage', file);
@@ -54,6 +53,7 @@ const AddArticlePage = () => {
 
     axios.post('http://localhost:5050/api/article/', data, {
       headers: {
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
       },
     });

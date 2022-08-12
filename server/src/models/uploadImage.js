@@ -16,4 +16,7 @@ const uploadImageSchema = new Schema({
   }
 })
 
+uploadImageSchema.set('toObject', { versionKey: false })
+uploadImageSchema.set('toJSON', { versionKey: false })
+
 module.exports = model('UploadImage', uploadImageSchema)

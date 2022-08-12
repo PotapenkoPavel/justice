@@ -21,12 +21,12 @@ const ArticlesPage = () => {
             <AuthorCard
               img={
                avatar
-                 ? `data:${avatar.mimetype};base64, ${avatar.imageBase64}`
+                 ? `data:${avatar.contentType};base64, ${avatar.imageBase64}`
                  : '/images/avatar123.jpg'
               }
             >
               <div className="author-card__name">{`${firstName} ${lastName}`}</div>
-              <div className="author-card__description" styles={{ whiteSpace: 'pre-line' }}>
+              <div className="author-card__description">
                 {description}
               </div>
             </AuthorCard>
