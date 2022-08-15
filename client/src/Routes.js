@@ -1,9 +1,9 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import MainPage from './pages/Main/MainPage';
-import ArticlesPage from './pages/Articles/ArticlesPage';
-import AddArticlePage from './pages/AddArticle/AddArticlePage';
+import MainPage from './pages/MainPage/MainPage';
+import MyArticlesPage from './pages/MyArticlesPage/MyArticlesPage';
+import AddArticlePage from './pages/AddArticlePage/AddArticlePage';
 import ArticlePage from './pages/ArticlePage/ArticlePage';
 import SignInPage from './pages/SignInPage/SignInPage';
 import LogInPage from './pages/LogInPage/LogInPage';
@@ -16,7 +16,8 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      <Route path="/*" element={<MainPage />} />
+      <Route path="/*" element={<Navigate to="/articles/1" />} />
+      <Route path="/articles/:page" element={<MainPage />} />
       <Route path="/article/:id" element={<ArticlePage />} />
 
       {!isAuth && (
@@ -27,10 +28,10 @@ const AppRoutes = () => {
       )}
 
       <Route
-        path="articles"
+        path="my-articles"
         element={(
           <ProtectedRoute isAuth={isAuth}>
-            <ArticlesPage />
+            <MyArticlesPage />
           </ProtectedRoute>
         )}
       />

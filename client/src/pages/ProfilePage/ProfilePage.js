@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Button } from '../../components/Button/Button';
+import Container from '../../components/Container/Container';
 import Title from '../../components/Title/Title';
 import AuthorCard from '../../components/AuthorCard/AuthorCard';
 import Input from '../../components/Input/Input';
+import Textarea from '../../components/Textarea/Textarea';
+import Button from '../../components/Button/Button';
+
+import { deleteUserAvatar, updateUserAvatar, updateUserInformation } from '../../redux/actionCreators/user';
 
 import './ProfilePage.sass';
-import { deleteUserAvatar, updateUserAvatar, updateUserInformation } from '../../redux/actionCreators/user';
 
 const ProfilePage = () => {
   const user = useSelector((state) => state.user);
@@ -28,13 +31,13 @@ const ProfilePage = () => {
     dispatch(updateUserAvatar(user._id, file, token));
   };
 
-  const deletePhotoHandler = () => {
+  const deleteAvatarHandler = () => {
     dispatch(deleteUserAvatar(user._id, token));
   };
 
   return (
     <main className="profile-page">
-      <div className="container">
+      <Container>
         <Title type="h2">Profile</Title>
 
         <section className="profile-page__content">
@@ -46,7 +49,7 @@ const ProfilePage = () => {
                 : '/images/avatar123.jpg'
             }
             >
-              <Button mix="author-card__button" theme="outline">
+              <Button mix="profile-page__change-avatar" variant="outline">
                 <label>
                   Change photo
                   <input
@@ -57,27 +60,44 @@ const ProfilePage = () => {
                   />
                 </label>
               </Button>
-              <Button mix="author-card__link" theme="link" onClick={deletePhotoHandler}>Delete photo</Button>
+              <Button
+                mix="profile-page__delete-avatar"
+                variant="link"
+                onClick={deleteAvatarHandler}
+              >
+                Delete photo
+              </Button>
             </AuthorCard>
           </div>
           <div className="profile-page__info">
             <div className="profile-page__name-wrapper">
-              <Input label="First name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-              <Input label="Last name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+              <Input
+                label="First name"
+                placeholder="Enter the first name..."
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <Input
+                label="Last name"
+                placeholder="Enter the last name..."
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
             </div>
             <div className="profile-page__description-wrapper">
-              <Input.Textarea
-                label="Description"
+              <Textarea
                 value={description}
+                label="Description"
+                placeholder="Enter the description..."
                 onChange={(e) => setDescription(e.target.value)}
               />
             </div>
             <div>
-              <Button theme="primary" onClick={saveChanges}>Save Changes</Button>
+              <Button onClick={saveChanges}>Save Changes</Button>
             </div>
           </div>
         </section>
-      </div>
+      </Container>
     </main>
   );
 };

@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Button } from '../../components/Button/Button';
+import Button from '../../components/Button/Button';
 import ArticleInfo from '../../components/ArticleInfo/ArticleInfo';
 import Tag from '../../components/Tag/Tag';
 import Spinner from '../../components/Spinner/Spinner';
@@ -37,7 +37,8 @@ const ArticlePage = () => {
         <div className="article-page__button">
           <div>
             <Button
-              theme="outline gray"
+              variant="outline"
+              theme="gray"
               onClick={() => navigate('/')}
             >
               All articles
@@ -59,7 +60,7 @@ const ArticlePage = () => {
               views={article.views}
             />
             <div>
-              <Button theme="outline gray">{article.tag}</Button>
+              <Button variant="outline" theme="gray">{article.tag}</Button>
             </div>
           </div>
 

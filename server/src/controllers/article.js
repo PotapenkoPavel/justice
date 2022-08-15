@@ -4,9 +4,13 @@ const fs = require("fs");
 
 const getArticles = async (req, res) => {
   try {
+    const { page = 1, limit = 10 } = req.query
+
+    console.log(page, limit)
     const articles = await Article
       .find()
-      .limit(10)
+      .limit(limit || 10)
+      .skip((page - 1) * limit)
       .populate({
         path: 'author',
         populate: {
@@ -17,7 +21,9 @@ const getArticles = async (req, res) => {
       })
       .populate('img', '-filename -_id')
 
-    return res.status(200).json({ articles })
+    const count = await Article.count()
+
+    return res.status(200).json({ articles, count })
   } catch (error) {
     return res.status(500).json({ error })
   }
