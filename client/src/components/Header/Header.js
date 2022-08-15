@@ -1,8 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import { Button } from '../Button/Button';
-import { Nav } from '../Nav/Nav';
+import Button from '../Button/Button';
+import Nav from '../Nav/Nav';
+import Logo from '../Logo/Logo';
+import Container from '../Container/Container';
 
 import './Header.sass';
 
@@ -12,18 +14,20 @@ export const Header = () => {
 
   return (
     <header className="header">
-      <div className="container header__container">
-        <div className="logo" onClick={() => navigate('/')}>
-          <img className="logo__img" src="/images/logodark.svg" alt="logo" />
-        </div>
+      <Container>
+        <Logo />
 
-        {isAuth ? (<Nav buttonSettings={{ theme: 'primary' }} />) : (
-          <div className="header__auth-block">
-            <Button theme="outline" onClick={() => navigate('/login')}>Log in</Button>
-            <Button theme="primary" onClick={() => navigate('/sign-in')}>Sign in</Button>
-          </div>
-        )}
-      </div>
+        {isAuth
+          ? <Nav buttonTheme="dark" />
+          : (
+            <div className="header__buttons">
+              <Button variant="outline" onClick={() => navigate('/login')}>Log in</Button>
+              <Button onClick={() => navigate('/sign-in')}>Sign in</Button>
+            </div>
+          )}
+      </Container>
     </header>
   );
 };
+
+export default Header;

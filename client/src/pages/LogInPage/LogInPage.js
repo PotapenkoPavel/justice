@@ -1,36 +1,30 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
-import { Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { Button } from '../../components/Button/Button';
+import Button from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
-import Input from '../../components/Input/Input';
+import Container from '../../components/Container/Container';
+import { ValidateInput } from '../../components/Input/Input';
 
-import { useShowMessage } from '../../hooks/useShowMessage';
-import { login, setError } from '../../redux/actionCreators/auth';
+import { login } from '../../redux/actionCreators/auth';
 import { schema } from './validation-shema';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './LogInPage.sass';
 
 const LogInPage = () => {
-  const error = useSelector((state) => state.auth.error);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { showMessage } = useShowMessage(setError);
 
   const submitHandler = ({ email, password }) => {
     dispatch(login(email, password));
   };
 
-  useEffect(() => {
-    showMessage(error && error.message);
-  }, [error]);
-
   return (
     <section className="login-page">
-      <div className="container">
+      <Container>
         <Title type="h2" textAlign="center">Log in to your account</Title>
 
         <Formik
@@ -42,16 +36,16 @@ const LogInPage = () => {
           onSubmit={submitHandler}
         >
           <Form className="login-page__form">
-            <Field component={Input.Validate} type="email" name="email" label="Email Address" />
-            <Field component={Input.Validate} type="password" name="password" label="Password" />
-            <Button theme="primary" type="submit">Log in</Button>
+            <Field component={ValidateInput} type="email" name="email" label="Email Address" />
+            <Field component={ValidateInput} type="password" name="password" label="Password" />
+            <Button type="submit">Log in</Button>
           </Form>
         </Formik>
         <div className="login-page__create-new">
           Don’t have a Times account?&nbsp;
-          <Link to="/sign-in"><span>Create one</span></Link>
+          <Button variant="link" onClick={() => navigate('/sign-in')}>Create one</Button>
         </div>
-      </div>
+      </Container>
       <ToastContainer />
     </section>
   );

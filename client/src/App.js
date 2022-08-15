@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Header } from './components/Header/Header';
-import { Footer } from './components/Footer/Footer';
 
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import AppRoutes from './Routes';
 
 import { setCredentials } from './redux/actionCreators/auth';

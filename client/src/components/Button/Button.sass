@@ -1,43 +1,66 @@
 .button
   padding: 15px 32px
+  font-family: "Open Sans", sans-serif
   font-size: 16px
-  line-height: 15px
+  line-height: 16px
   cursor: pointer
 
-  // types
-  &.primary
-    border: 1px solid #242424
-    background-color: #242424
-    color: #ffffff
+  // variant
+  &.default
+    border-width: 1px
+    border-bottom-style: solid
 
   &.outline
-    border: 1px solid #242424
-    background-color: transparent
-    color: #242424
+    border-width: 1px
+    border-bottom-style: solid
+    background-color: transparent !important
+    font-weight: 400
 
-  &.disabled
-    border: 1px solid #BDBDBD
-    background-color: transparent
-    color: #BDBDBD
-    cursor: default
+    &:disabled
+      cursor: default
 
   &.text
+    display: inline
+    padding: 0
     border: none
     background-color: transparent
 
   &.link
+    display: inline
     padding: 0
-    border: none
-    background-color: transparent
+    border: none !important
+    background-color: transparent !important
     text-decoration: underline
 
   // themes
-  &.light
-    border-color: #ffffff
-    color: #ffffff
   &.dark
-    border-color: #242424
+    background-color: #242424
+    border: 1px solid #242424
+    color: #ffffff
+
+    &.outline
+      color: #242424
+
+      &:disabled
+        border: 1px solid #E1E1E1
+        color: #24242466
+
+    &.link
+      color: #242424
+
+  &.light
+    background-color: #ffffff
+    border: 1px solid #ffffff
     color: #242424
+
+    &.outline
+      color: #ffffff
+
+    &.text
+      background-color: transparent
+      border: none
+      color: #ffffff
+
   &.gray
-    border-color: #929292
+    border: 1px solid #929292
     color: #929292

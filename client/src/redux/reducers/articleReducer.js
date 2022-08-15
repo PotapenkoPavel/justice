@@ -18,7 +18,7 @@ export const articleReducer = (state = initialState, action) => {
     case ARTICLE_SET_ERROR:
       return { ...state, error: action.payload };
     case FETCH_ARTICLES:
-      return { ...state, articles: action.payload };
+      return { ...state, articles: action.payload.articles, count: action.payload.count };
     case FETCH_ARTICLE_BY_ID:
       return { ...state, article: action.payload };
     case FETCH_ARTICLES_BY_OWNER:
