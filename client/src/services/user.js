@@ -1,7 +1,7 @@
 import { apiConfig } from '../config/api';
 import { ajaxWrapper } from '../helpers/ajaxWrapper';
 
-export const getUser = (id, token) => {
+const getUser = (id, token) => {
   const url = `${apiConfig.userURL}/${id}`;
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -14,7 +14,7 @@ export const getUser = (id, token) => {
   });
 };
 
-export const updateUserInformation = (id, data, token) => {
+const updateUserInformation = (id, data, token) => {
   const url = `${apiConfig.userURL}/${id}`;
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -28,7 +28,7 @@ export const updateUserInformation = (id, data, token) => {
   });
 };
 
-export const updateUserAvatar = (id, file, token) => {
+const updateUserAvatar = (id, file, token) => {
   const url = `${apiConfig.userURL}/${id}/avatar`;
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -46,7 +46,7 @@ export const updateUserAvatar = (id, file, token) => {
   });
 };
 
-export const deleteUserAvatar = (id, token) => {
+const deleteUserAvatar = (id, token) => {
   const url = `${apiConfig.userURL}/${id}/avatar`;
   const headers = {
     Authorization: `Bearer ${token}`,

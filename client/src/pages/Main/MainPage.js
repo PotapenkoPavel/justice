@@ -1,27 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../components/Button/Button';
 import Article from '../../components/Atricle/Article';
-import ArticleApi from '../../services/article';
+import Spinner from '../../components/Spinner/Spinner';
+import { fetchArticles } from '../../redux/actionCreators/article';
 
 import './MainPage.sass';
 
 const MainPage = () => {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { articles, isLoading } = useSelector((state) => state.article);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getArticles = async () => {
-      setLoading(true);
-      const { data } = await ArticleApi.getArticles();
-      setArticles(data.articles);
-      setLoading(false);
-    };
-
-    getArticles();
+    dispatch(fetchArticles());
   }, []);
 
-  if (loading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
 
   return (
     <>

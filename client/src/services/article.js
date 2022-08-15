@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { apiConfig } from '../config/api';
 
-export const getArticles = () => {
+const getArticles = () => {
   const url = `${apiConfig.articleURL}`;
 
   return axios({ url, method: 'GET' });
 };
 
-export const getArticlesByOwner = (id, token) => {
+const getArticlesByOwner = (id, token) => {
   const url = `${apiConfig.articleURL}/owner/${id}`;
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -16,13 +16,13 @@ export const getArticlesByOwner = (id, token) => {
   return axios({ url, headers, method: 'GET' });
 };
 
-export const getArticleById = (id) => {
+const getArticleById = (id) => {
   const url = `${apiConfig.articleURL}/${id}`;
 
   return axios({ url, method: 'GET' });
 };
 
-export const addArticle = (data, token) => {
+const addArticle = (data, token) => {
   const url = `${apiConfig.articleURL}`;
   const headers = {
     Authorization: `Bearer ${token}`,
@@ -34,6 +34,12 @@ export const addArticle = (data, token) => {
   });
 };
 
+const updateArticleViews = (id) => {
+  const url = `${apiConfig.articleURL}/${id}/views`;
+
+  return axios({ url });
+};
+
 export default {
-  getArticles, getArticlesByOwner, getArticleById, addArticle,
+  getArticles, getArticlesByOwner, getArticleById, addArticle, updateArticleViews,
 };

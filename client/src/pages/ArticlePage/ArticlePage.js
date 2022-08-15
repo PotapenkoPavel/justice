@@ -1,29 +1,35 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../components/Button/Button';
 import ArticleInfo from '../../components/ArticleInfo/ArticleInfo';
 import Tag from '../../components/Tag/Tag';
-import ArticleApi from '../../services/article';
+import Spinner from '../../components/Spinner/Spinner';
+import { fetchArticleById, removeArticle } from '../../redux/actionCreators/article';
+import ArticleAPI from '../../services/article';
 
 import './ArticlePage.sass';
 
 const ArticlePage = () => {
-  const [article, setArticle] = useState(null);
+  const { article, isLoading } = useSelector((state) => state.article);
+  const dispatch = useDispatch();
   const { id } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchArticle = async () => {
-      const response = await ArticleApi.getArticleById(id);
+    dispatch(fetchArticleById(id));
 
-      setArticle(response.data);
+    return () => {
+      dispatch(removeArticle());
     };
-
-    fetchArticle();
   }, []);
 
-  if (!article) return null;
+  if (isLoading || !article) return <Spinner />;
+
+  if (article) {
+    ArticleAPI.updateArticleViews(id);
+  }
 
   return (
     <main className="article-page">

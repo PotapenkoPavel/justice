@@ -5,8 +5,8 @@ const verifyToken = require('../middleware/verify-token')
 const upload = require('../middleware/multer')
 
 const { register, login, sendTokenPayload } = require('../controllers/auth');
-const { getArticles, addArticle, getArticlesByOwner, getArticleById} = require("../controllers/article");
-const {getUser, updateUserData, updateUserAvatar, deleteUserAvatar } = require("../controllers/user");
+const { getArticles, addArticle, getArticlesByOwner, getArticleById, updateArticleViews } = require("../controllers/article");
+const { getUser, updateUserData, updateUserAvatar, deleteUserAvatar } = require("../controllers/user");
 
 const registerSchema = require('../schemas/register-schema');
 const loginSchema = require('../schemas/login-schema');
@@ -30,6 +30,8 @@ router.get('/article', getArticles)
 router.get('/article/owner/:id', verifyToken, getArticlesByOwner)
 
 router.get('/article/:id', getArticleById)
+
+router.get('/article/:id/views', updateArticleViews)
 
 router.post('/article', verifyToken, upload.single('previewImage'), addArticle)
 
