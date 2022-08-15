@@ -111,9 +111,25 @@ const addArticle = async (req, res) => {
   }
 }
 
+const updateArticleViews = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const article = await Article.findById(id)
+    article.views += 1
+
+    const updatedArticle = await article.save()
+
+    res.status(200).json(updatedArticle)
+  } catch (error) {
+    return res.status(500).json({ error })
+  }
+}
+
 module.exports = {
   getArticles,
   getArticleById,
   getArticlesByOwner,
-  addArticle
+  addArticle,
+  updateArticleViews
 }

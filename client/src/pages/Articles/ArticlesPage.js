@@ -1,26 +1,25 @@
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Article from '../../components/Atricle/Article';
 import AuthorCard from '../../components/AuthorCard/AuthorCard';
+import Spinner from '../../components/Spinner/Spinner';
 import { Button } from '../../components/Button/Button';
-import ArticleApi from '../../services/article';
+import { fetchArticlesByOwner } from '../../redux/actionCreators/article';
 
 import './ArticlesPage.sass';
 
 const ArticlesPage = () => {
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.auth.token);
-  const [articles, setArticles] = useState([]);
+  const { articlesByOwner, isLoading } = useSelector((state) => state.article);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchArticles = async () => {
-      const response = await ArticleApi.getArticlesByOwner(user._id, token);
-      setArticles(response.data.articles);
-    };
-
-    fetchArticles();
+    dispatch(fetchArticlesByOwner(user._id, token));
   }, []);
+
+  if (isLoading) return <Spinner />;
 
   return (
     <main className="articles-page">
@@ -42,7 +41,7 @@ const ArticlesPage = () => {
           </section>
           <section className="articles-page__list">
             <div>
-              {articles.map(({
+              {articlesByOwner.map(({
                 _id,
                 title,
                 tag,

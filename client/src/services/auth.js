@@ -1,7 +1,7 @@
 import { apiConfig } from '../config/api';
 import { ajaxWrapper } from '../helpers/ajaxWrapper';
 
-export const login = (data, token) => {
+const login = (data, token) => {
   const url = `${apiConfig.authURL}/login`;
   const headers = {};
 
@@ -15,7 +15,7 @@ export const login = (data, token) => {
   });
 };
 
-export const register = (data) => {
+const register = (data) => {
   const url = `${apiConfig.authURL}/register`;
 
   return ajaxWrapper({
