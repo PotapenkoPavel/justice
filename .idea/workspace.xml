@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a1825a2-3b9a-488e-ac3f-227afd40de50" name="Changes" comment="">
+    <list default="true" id="3a1825a2-3b9a-488e-ac3f-227afd40de50" name="Changes" comment="user_controller - feat - change user action creators">
       <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/AddArticle/AddArticlePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/AddArticle/AddArticlePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/ArticlePage/ArticlePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/ArticlePage/ArticlePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/Articles/ArticlesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Articles/ArticlesPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/ProfilePage/ProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/ProfilePage/ProfilePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/actionCreators/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/actionCreators/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/redux/reducers/userReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/redux/reducers/userReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/controllers/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/models/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/models/article.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/models/uploadImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/models/uploadImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/Main/MainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Main/MainPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/controllers/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/article.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,24 +27,25 @@
   <component name="ProjectId" id="2CkN72qTTEPmJMxEwc72hTVCAgJ" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/pavelpotapenko/workflow/justice-it/justice",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.standard": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.standard": "",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "settings.javascript.linters.eslint",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/pavelpotapenko/workflow/justice-it/justice&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.standard&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.standard&quot;: &quot;&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.linters.eslint&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -64,6 +58,7 @@
       <workItem from="1659343443191" duration="61000" />
       <workItem from="1659343524271" duration="6000" />
       <workItem from="1659943461881" duration="13000" />
+      <workItem from="1660504322451" duration="934000" />
     </task>
     <servers />
   </component>

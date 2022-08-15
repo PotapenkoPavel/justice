@@ -52,8 +52,15 @@ const getArticlesByOwner = async (req, res) => {
     const articles = await Article
       .find()
       .where({ author: id })
-      .populate('author', ['firstName', 'lastName', 'email'])
-      .populate('img', ['filename', 'contentType'])
+      .populate({
+        path: 'author',
+        populate: {
+          path: 'avatar',
+          select: '-filename -_id'
+        },
+        select: '-password'
+      })
+      .populate('img', '-filename -_id')
 
     return res.status(200).json({ articles })
   } catch (error) {

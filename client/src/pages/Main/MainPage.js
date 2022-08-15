@@ -11,20 +11,15 @@ const MainPage = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const getArticles = () => {
+    const getArticles = async () => {
       setLoading(true);
-
-      setTimeout(async () => {
-        const { data } = await ArticleApi.getArticles();
-        setArticles(data.articles);
-        setLoading(false);
-      }, 100000);
+      const { data } = await ArticleApi.getArticles();
+      setArticles(data.articles);
+      setLoading(false);
     };
 
     getArticles();
   }, []);
-
-  console.log(articles);
 
   if (loading) return <div>Loading...</div>;
 

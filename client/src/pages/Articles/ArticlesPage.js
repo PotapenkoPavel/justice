@@ -1,30 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-// import axios from 'axios';
 
 import Article from '../../components/Atricle/Article';
 import AuthorCard from '../../components/AuthorCard/AuthorCard';
 import { Button } from '../../components/Button/Button';
-
-import { articles } from '../../moc';
+import ArticleApi from '../../services/article';
 
 import './ArticlesPage.sass';
 
 const ArticlesPage = () => {
   const user = useSelector((state) => state.user);
-  // const token = useSelector((state) => state.auth.token);
+  const token = useSelector((state) => state.auth.token);
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
+    const fetchArticles = async () => {
+      const response = await ArticleApi.getArticlesByOwner(user._id, token);
+      setArticles(response.data.articles);
+    };
 
+    fetchArticles();
   }, []);
-
-  // const fetchArticles = async () => {
-  //   const response = await axios.get(`http://localhost:5050/api/article/owner/${user._id}`, null, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-  // };
 
   return (
     <main className="articles-page">
@@ -47,17 +43,27 @@ const ArticlesPage = () => {
           <section className="articles-page__list">
             <div>
               {articles.map(({
-                id, previewUrl, tags, title, description, viewsCount, date, author,
+                _id,
+                title,
+                tag,
+                img: { contentType, imageBase64 },
+                description,
+                author,
+                timestamp,
+                readTimeInMinutes,
+                views,
               }) => (
                 <Article
-                  key={id}
-                  previewUrl={previewUrl}
-                  tags={tags}
+                  key={_id}
+                  id={_id}
                   title={title}
+                  tag={tag}
+                  img={`data:${contentType};base64, ${imageBase64}`}
                   description={description}
-                  views={viewsCount}
-                  date={date}
                   author={author}
+                  timestamp={timestamp}
+                  readTime={readTimeInMinutes}
+                  views={views}
                   type="column"
                 />
               ))}
