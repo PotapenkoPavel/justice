@@ -34,7 +34,8 @@ const AddArticlePage = () => {
   const [title, setTitle] = useState('');
   const [tag, setTag] = useState('');
   const [previewText, setPreviewText] = useState('');
-  const userId = useSelector((state) => state.auth.user._id);
+  const token = useSelector((state) => state.auth.token);
+  const userId = useSelector((state) => state.user._id);
   const ref = createRef();
 
   const submitHandler = async (e) => {
@@ -44,14 +45,15 @@ const AddArticlePage = () => {
 
     const data = new FormData();
     data.append('previewImage', file);
-    data.append('previewText', previewText);
+    data.append('description', previewText);
     data.append('title', title);
     data.append('tag', tag);
     data.append('HTML', draftToHtml(convertToRaw(editorState.getCurrentContent())));
-    data.append('author', userId);
+    data.append('userId', userId);
 
     axios.post('http://localhost:5050/api/article/', data, {
       headers: {
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data',
       },
     });

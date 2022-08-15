@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model, Types} = require('mongoose')
 
 const uploadImageSchema = new Schema({
   filename: {
@@ -15,5 +15,8 @@ const uploadImageSchema = new Schema({
     required: true
   }
 })
+
+uploadImageSchema.set('toObject', { versionKey: false })
+uploadImageSchema.set('toJSON', { versionKey: false })
 
 module.exports = model('UploadImage', uploadImageSchema)

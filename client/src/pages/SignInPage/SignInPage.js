@@ -8,7 +8,7 @@ import Input from '../../components/Input/Input';
 import Title from '../../components/Title/Title';
 
 import { useShowMessage } from '../../hooks/useShowMessage';
-import { register, setError } from '../../redux/actions/auth';
+import { register, setError } from '../../redux/actionCreators/auth';
 import { schema } from './validation-shema';
 
 import './SignInPage.sass';
@@ -22,8 +22,10 @@ const SignInPage = () => {
     showMessage(error && error.message);
   }, [error]);
 
-  const submitHandler = (values) => {
-    dispatch(register(values));
+  const submitHandler = ({
+    email, password, firstName, lastName,
+  }) => {
+    dispatch(register(email, password, firstName, lastName));
   };
 
   return (

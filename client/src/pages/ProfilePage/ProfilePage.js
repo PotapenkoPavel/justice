@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Button } from '../../components/Button/Button';
 import Title from '../../components/Title/Title';
@@ -6,21 +7,29 @@ import AuthorCard from '../../components/AuthorCard/AuthorCard';
 import Input from '../../components/Input/Input';
 
 import './ProfilePage.sass';
+import { deleteUserAvatar, updateUserAvatar, updateUserInformation } from '../../redux/actionCreators/user';
 
 const ProfilePage = () => {
-  const { user, token } = JSON.parse(localStorage.getItem('auth'));
+  const user = useSelector((state) => state.user);
+  const token = useSelector((state) => state.auth.token);
+  const dispatch = useDispatch();
 
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
-  const [description, setDescription] = useState('');
+  const [description, setDescription] = useState(user.description);
 
   const saveChanges = () => {
-    localStorage.setItem('auth', JSON.stringify({
-      token,
-      user: {
-        ...user, firstName, lastName, description,
-      },
-    }));
+    dispatch(updateUserInformation(firstName, lastName, description, user._id, token));
+  };
+
+  const changeAvatarHandler = (e) => {
+    const file = e.target.files[0];
+
+    dispatch(updateUserAvatar(user._id, file, token));
+  };
+
+  const deletePhotoHandler = () => {
+    dispatch(deleteUserAvatar(user._id, token));
   };
 
   return (
@@ -31,10 +40,24 @@ const ProfilePage = () => {
         <section className="profile-page__content">
           <div className="profile-page__user">
             <AuthorCard
-              img="/images/avatar11.png"
+              img={
+              user.avatar
+                ? `data:${user.avatar.contentType};base64, ${user.avatar.imageBase64}`
+                : '/images/avatar123.jpg'
+            }
             >
-              <Button mix="author-card__button" theme="outline">Change photo</Button>
-              <Button mix="author-card__link" theme="link">Delete photo</Button>
+              <Button mix="author-card__button" theme="outline">
+                <label>
+                  Change photo
+                  <input
+                    type="file"
+                    onChange={changeAvatarHandler}
+                    accept="image/png,image/jpg,image/jpeg"
+                    hidden
+                  />
+                </label>
+              </Button>
+              <Button mix="author-card__link" theme="link" onClick={deletePhotoHandler}>Delete photo</Button>
             </AuthorCard>
           </div>
           <div className="profile-page__info">

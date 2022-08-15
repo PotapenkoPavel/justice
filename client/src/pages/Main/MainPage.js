@@ -1,46 +1,98 @@
+import { useEffect, useState } from 'react';
+
 import { Button } from '../../components/Button/Button';
 import Article from '../../components/Atricle/Article';
-
-import { articles, reccomendArticle } from '../../moc';
+import ArticleApi from '../../services/article';
 
 import './MainPage.sass';
 
-const MainPage = () => (
-  <>
-    <section className="recommended-block">
-      <div className="container">
-        <Article {...reccomendArticle} />
-      </div>
-    </section>
+const MainPage = () => {
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-    <section className="popular-block">
-      <div className="container">
-        <h2 className="popular-block__title">Popular articles</h2>
-        <div className="popular-block__articles">
+  useEffect(() => {
+    const getArticles = async () => {
+      setLoading(true);
+      const { data } = await ArticleApi.getArticles();
+      setArticles(data.articles);
+      setLoading(false);
+    };
+
+    getArticles();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+
+  return (
+    <>
+      <section className="recommended-block">
+        <div className="container">
           {articles.map(({
-            id, previewUrl, tags, title, description, viewsCount, date, author,
+            _id,
+            title,
+            tag,
+            img: { contentType, imageBase64 },
+            description,
+            author,
+            timestamp,
+            readTimeInMinutes,
+            views,
           }) => (
             <Article
-              key={id}
-              previewUrl={previewUrl}
-              tags={tags}
+              key={_id}
+              id={_id}
               title={title}
+              tag={tag}
+              img={`data:${contentType};base64, ${imageBase64}`}
               description={description}
-              viewsCount={viewsCount}
-              date={date}
               author={author}
-              type="compact"
+              timestamp={timestamp}
+              readTime={readTimeInMinutes}
+              views={views}
             />
           ))}
         </div>
+      </section>
 
-        <div className="popular-block__navigate">
-          <Button theme="disabled">Prev</Button>
-          <Button theme="outline">Next</Button>
+      <section className="popular-block">
+        <div className="container">
+          <h2 className="popular-block__title">Popular articles</h2>
+          <div className="popular-block__articles">
+            {articles.map(({
+              _id,
+              title,
+              tag,
+              img: { contentType, imageBase64 },
+              description,
+              author,
+              timestamp,
+              readTimeInMinutes,
+              views,
+            }) => (
+              <Article
+                key={_id}
+                id={_id}
+                title={title}
+                tag={tag}
+                img={`data:${contentType};base64, ${imageBase64}`}
+                description={description}
+                author={author}
+                timestamp={timestamp}
+                readTime={readTimeInMinutes}
+                views={views}
+                type="compact"
+              />
+            ))}
+          </div>
+
+          <div className="popular-block__navigate">
+            <Button theme="disabled">Prev</Button>
+            <Button theme="outline">Next</Button>
+          </div>
         </div>
-      </div>
-    </section>
-  </>
-);
+      </section>
+    </>
+  );
+};
 
 export default MainPage;

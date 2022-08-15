@@ -5,14 +5,16 @@ import { Footer } from './components/Footer/Footer';
 
 import AppRoutes from './Routes';
 
-import { tryAuthenticate } from './redux/actions/auth';
+import { setCredentials } from './redux/actionCreators/auth';
 
 export const App = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(tryAuthenticate());
-  });
+    const auth = JSON.parse(localStorage.getItem('auth'));
+
+    if (auth && auth.token && auth.userId) dispatch(setCredentials(auth.token, auth.userId));
+  }, []);
 
   return (
     <>

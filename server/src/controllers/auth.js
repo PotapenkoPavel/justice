@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 
 const User = require('../models/user');
 const config = require('../config/keys')
-const {decode} = require("jsonwebtoken");
 
 const register = async (req, res) => {
   try {
@@ -26,20 +25,15 @@ const register = async (req, res) => {
       password: bcrypt.hashSync(password),
     });
 
-    const { _id } = await user.save();
+    const { id } = await user.save();
 
     const token = jwt.sign(
-      { _id, email, firstName, lastName },
+      { userId: id },
       config.JWTSecret,
       { expiresIn: "7 days"}
     )
 
-    const responseData = {
-      token,
-      user: { _id, email, firstName, lastName }
-    }
-
-    return res.status(200).json(responseData);
+    return res.status(200).json({ token, userId: id });
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -59,27 +53,15 @@ const login = async (req, res) => {
     if (!match)
       return res.status(400).json({ message: "Please provide a valid email or password"})
 
+    const { id, firstName, lastName, avatar } = await candidate.populate('avatar', '-_id -__v -filename')
+
     const token = jwt.sign(
-      { email,
-        _id: candidate.id,
-        firstName: candidate.firstName,
-        lastName: candidate.lastName
-      },
+      { userId: id },
       config.JWTSecret,
       { expiresIn: "7 days"}
     )
 
-    const responseData = {
-      token,
-      user: {
-        email,
-        _id: candidate.id,
-        firstName: candidate.firstName,
-        lastName: candidate.lastName
-      }
-    }
-
-    return res.status(200).json(responseData)
+    return res.status(200).json({ token, userId: id})
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }
@@ -88,23 +70,12 @@ const login = async (req, res) => {
 const sendTokenPayload = async (req, res) => {
   try {
     const token = req.token
-    const { _id, email, firstName, lastName } = req.tokenPayload
+    const { userId } = req.tokenPayload
 
-    const response = {
-      token,
-      user: {
-        _id,
-        email,
-        firstName,
-        lastName
-      }
-    }
-
-    return res.status(200).json(response)
+    return res.status(200).json({ token, userId })
   } catch (err) {
     return res.status(401).json({ message: 'invalid token' })
   }
-
 
   return res.status(200).json({ message: 'verify-token endpoint' })
 }
