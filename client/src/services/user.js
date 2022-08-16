@@ -1,8 +1,7 @@
-import { apiConfig } from '../config/api';
 import { ajaxWrapper } from '../helpers/ajaxWrapper';
 
 const getUser = (id, token) => {
-  const url = `${apiConfig.userURL}/${id}`;
+  const url = `${process.env.REACT_APP_API_URL}/user/${id}`;
   const headers = {
     Authorization: `Bearer ${token}`,
   };
@@ -15,7 +14,7 @@ const getUser = (id, token) => {
 };
 
 const updateUserInformation = (id, data, token) => {
-  const url = `${apiConfig.userURL}/${id}`;
+  const url = `${process.env.REACT_APP_API_URL}/user/${id}`;
   const headers = {
     Authorization: `Bearer ${token}`,
   };
@@ -29,7 +28,7 @@ const updateUserInformation = (id, data, token) => {
 };
 
 const updateUserAvatar = (id, file, token) => {
-  const url = `${apiConfig.userURL}/${id}/avatar`;
+  const url = `${process.env.REACT_APP_API_URL}/user/${id}/avatar`;
   const headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'multipart/form-data',
@@ -47,7 +46,7 @@ const updateUserAvatar = (id, file, token) => {
 };
 
 const deleteUserAvatar = (id, token) => {
-  const url = `${apiConfig.userURL}/${id}/avatar`;
+  const url = `${process.env.REACT_APP_API_URL}/user/${id}/avatar`;
   const headers = {
     Authorization: `Bearer ${token}`,
   };

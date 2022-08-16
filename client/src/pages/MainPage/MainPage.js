@@ -19,6 +19,8 @@ const MainPage = () => {
   const { articles, count, isLoading } = useSelector((state) => state.article);
   const dispatch = useDispatch();
 
+  console.log(process.env.REACT_APP_API_URL);
+
   useEffect(() => {
     dispatch(fetchArticles(page));
   }, []);

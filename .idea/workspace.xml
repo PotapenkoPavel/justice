@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3a1825a2-3b9a-488e-ac3f-227afd40de50" name="Changes" comment="user_controller - feat - change user action creators">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/eslint.xml" afterDir="false" />
+    <list default="true" id="3a1825a2-3b9a-488e-ac3f-227afd40de50" name="Changes" comment="user_controller - feat - connect client to user controller">
+      <change afterPath="$PROJECT_DIR$/client/.env.development" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/.env.production" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Articles/ArticlesPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Articles/ArticlesPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Main/MainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Main/MainPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/controllers/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/controllers/article.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/MainPage/MainPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/MainPage/MainPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/article.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/article.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="backend" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

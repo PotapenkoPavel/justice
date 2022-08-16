@@ -2,13 +2,13 @@ import axios from 'axios';
 import { apiConfig } from '../config/api';
 
 const getArticles = (page) => {
-  const url = `${apiConfig.articleURL}?page=${page}&limit=${apiConfig.articlesLimit}`;
+  const url = `${process.env.REACT_APP_API_URL}/article?page=${page}&limit=${apiConfig.articlesLimit}`;
 
   return axios({ url, method: 'GET' });
 };
 
 const getArticlesByOwner = (id, token) => {
-  const url = `${apiConfig.articleURL}/owner/${id}`;
+  const url = `${process.env.REACT_APP_API_URL}/article/owner/${id}`;
   const headers = {
     Authorization: `Bearer ${token}`,
   };
@@ -17,13 +17,13 @@ const getArticlesByOwner = (id, token) => {
 };
 
 const getArticleById = (id) => {
-  const url = `${apiConfig.articleURL}/${id}`;
+  const url = `${process.env.REACT_APP_API_URL}/article/${id}`;
 
   return axios({ url, method: 'GET' });
 };
 
 const addArticle = (data, token) => {
-  const url = `${apiConfig.articleURL}`;
+  const url = `${process.env.REACT_APP_API_URL}/article`;
   const headers = {
     Authorization: `Bearer ${token}`,
     'Content-Type': 'multipart/form-data',
@@ -44,7 +44,7 @@ const addArticle = (data, token) => {
 };
 
 const updateArticleViews = (id) => {
-  const url = `${apiConfig.articleURL}/${id}/views`;
+  const url = `${process.env.REACT_APP_API_URL}/article/${id}/views`;
 
   return axios({ url });
 };
